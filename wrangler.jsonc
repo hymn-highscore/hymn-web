@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "soundofhymn",
+  "name": "soundofhymns",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-02-14",
   "compatibility_flags": ["nodejs_compat"],
