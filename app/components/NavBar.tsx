@@ -95,9 +95,6 @@ export default function NavBar() {
             <nav className="flex flex-col gap-4">
               <MobileLink href="/about">About7 Us</MobileLink>
               <MobileLink href="/contact">Contact</MobileLink>
-
-
-
               <div className="h-px bg-white/10 my-2" />
               <MobileLink href="/login">Log In</MobileLink>
               <MobileLink href="/register" highlight>Get Started</MobileLink>

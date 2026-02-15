@@ -63,40 +63,42 @@ export default function Footer() {
  
           </div>
 
-          {/* Quick Links (Col Span 2) */}
-          <div className="lg:col-span-2 lg:col-start-6">
-            <h3 className="text-white font-semibold mb-6">Product</h3>
-            <ul className="space-y-4">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link 
-                    href={link.href}
-                    className="text-gray-400 hover:text-gold transition-colors duration-200 flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links (Col Span 2) */}
-          <div className="lg:col-span-2">
-            <h3 className="text-white font-semibold mb-6">Legal</h3>
-            <ul className="space-y-4">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <Link 
-                    href={link.href}
-                    className="text-gray-400 hover:text-gold transition-colors duration-200 flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="lg:col-span-4 lg:col-start-6 grid grid-cols-2 gap-8">
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Product</h3>
+              <ul className="space-y-4">
+                {footerLinks.product.map((link) => (
+                  <li key={link.label}>
+                    <Link 
+                      href={link.href}
+                      className="text-gray-400 hover:text-gold transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Legal Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Legal</h3>
+              <ul className="space-y-4">
+                {footerLinks.legal.map((link) => (
+                  <li key={link.label}>
+                    <Link 
+                      href={link.href}
+                      className="text-gray-400 hover:text-gold transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
 

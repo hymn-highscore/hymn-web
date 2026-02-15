@@ -72,10 +72,10 @@ export default function Hero() {
           {/* CTA BUTTONS */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-stretch"
           >
-            <Link href="/download">
-              <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all hover:-translate-y-1 overflow-hidden">
+            <Link href="/download" className="w-full sm:w-auto">
+              <button className="w-full group relative px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all hover:-translate-y-1 overflow-hidden">
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative flex items-center gap-2">
                   <Play size={20} fill="currentColor" />
@@ -84,26 +84,14 @@ export default function Hero() {
               </button>
             </Link>
 
-            <Link href="/download">
-              <button className="group px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+            <Link href="/download" className="w-full sm:w-auto">
+              <button className="w-full group px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
                 <Download size={20} />
                 Download App
               </button>
             </Link>
           </motion.div>
 
-          {/* TRUST INDICATOR */}
-          <motion.div variants={fadeUp} className="mt-10 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500">
-            <div className="flex -space-x-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800 flex items-center justify-center text-xs">
-                  {/* Placeholder for user avatars */}
-                  <span className="text-gray-400">User</span>
-                </div>
-              ))}
-            </div>
-            <p>Trusted by <span className="text-white font-medium">500+</span> choirs</p>
-          </motion.div>
         </motion.div>
 
         {/* PHONE MOCKUP */}
@@ -178,7 +166,7 @@ export default function Hero() {
           </div>
 
           {/* Floating Elements */}
-          <motion.div 
+          {/* <motion.div 
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -left-8 top-1/3 p-4 rounded-xl bg-gray-900/90 backdrop-blur-md border border-white/10 shadow-xl flex items-center gap-3"
@@ -190,7 +178,7 @@ export default function Hero() {
               <p className="text-white text-sm font-bold">Soprano</p>
               <p className="text-xs text-gray-400">Voice Part Active</p>
             </div>
-          </motion.div>
+          </motion.div> */}
 
         </motion.div>
       </div>
