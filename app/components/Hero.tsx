@@ -84,6 +84,16 @@ export default function Hero() {
               </button>
             </Link>
 
+             {/* <Link href="/download" className="w-full sm:w-auto">
+              <button className="w-full group relative px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all hover:-translate-y-1 overflow-hidden">
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                <span className="relative flex items-center gap-2">
+                  <Download size={20} />
+                Download App
+                </span>
+              </button>
+            </Link> */}
+
             <Link href="/download" className="w-full sm:w-auto">
               <button className="w-full group px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
                 <Download size={20} />

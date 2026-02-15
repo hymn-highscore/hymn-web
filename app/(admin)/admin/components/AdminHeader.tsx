@@ -8,7 +8,7 @@ import {
   ChevronDown
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 
 export default function AdminHeader({
@@ -19,10 +19,24 @@ export default function AdminHeader({
   toggleSidebar: () => void;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  function getPageTitle(path: string) {
+    if (path === "/admin") return "Dashboard";
+    if (path.startsWith("/admin/my-hymns")) return "My Hymns";
+    if (path.startsWith("/admin/download-hymnal")) return "Download Hymnal";
+    if (path.startsWith("/admin/instruments")) return "Instruments";
+    if (path.startsWith("/admin/request-hymn")) return "Request Hymn";
+    if (path.startsWith("/admin/subscription")) return "Subscription";
+    if (path.startsWith("/admin/profile")) return "Profile";
+    return "Admin";
+  }
+
+  const currentTitle = getPageTitle(pathname || "/admin");
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -55,10 +69,8 @@ export default function AdminHeader({
         h-16 px-4 md:px-6
         flex items-center justify-between
         transition-all duration-300
-        ${scrolled 
-          ? "bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-md border-b border-gray-200 dark:border-white/10 shadow-sm" 
-          : "bg-transparent border-b border-transparent"
-        }
+         "bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-md border-b border-gray-200 dark:border-white/10 shadow-lg shadow-black/10 dark:shadow-black/40" 
+       
       `}
     >
       {/* LEFT: Toggle & Brand (Mobile mainly) */}
@@ -71,9 +83,8 @@ export default function AdminHeader({
           <Menu size={20} />
         </button>
 
-        {/* Breadcrumb or Page Title Placeholder */}
         <div className="hidden md:flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-          <span className="text-gray-900 dark:text-white">Dashboard</span>
+          <span className="text-gray-900 dark:text-white">{currentTitle}</span>
         </div>
       </div>
 
