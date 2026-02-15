@@ -1,0 +1,291 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+/* =========================================================
+   THEME TOKENS — CSS VARIABLES
+========================================================= */
+:root {
+  /* Brand Colors */
+  --color-gold: #d4af37;
+  --color-gold-muted: #bfa14a;
+  --color-gold-soft: #e6c770;
+  
+  /* Primary Action Colors (Purple based on existing) */
+  --primary: #9333ea;       /* purple-600 */
+  --primary-foreground: #ffffff;
+  
+  /* LIGHT MODE - Professional Clean/Slate */
+  --background: #ffffff;
+  --foreground: #09090b;    /* zinc-950 */
+  
+  --surface: #ffffff;
+  --surface-foreground: #09090b;
+  
+  --muted: #f4f4f5;         /* zinc-100 */
+  --muted-foreground: #71717a; /* zinc-500 */
+  
+  --border: #e4e4e7;        /* zinc-200 */
+  --input: #e4e4e7;
+  
+  /* AUTH PANELS (header / sidebar) */
+  --panel-bg: #ffffff;
+  --panel-border: #e4e4e7;  /* zinc-200 */
+  
+  /* Status Colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+}
+
+/* =========================================================
+   DARK MODE (next-themes) - Deep Zinc/Black
+========================================================= */
+.dark {
+  /* Refined Dark Mode (Not pure black, but deep zinc) */
+  --background: #09090b;    /* zinc-950 */
+  --foreground: #fafafa;    /* zinc-50 */
+  
+  --surface: #18181b;       /* zinc-900 */
+  --surface-foreground: #fafafa;
+  
+  --muted: #27272a;         /* zinc-800 */
+  --muted-foreground: #a1a1aa; /* zinc-400 */
+  
+  --border: #27272a;        /* zinc-800 */
+  --input: #27272a;
+
+  /* AUTH PANELS (dark glass look capability) */
+  --panel-bg: rgba(9, 9, 11, 0.8); /* zinc-950 with opacity */
+  --panel-border: #27272a;         /* zinc-800 */
+}
+
+/* =========================================================
+   BASE DOCUMENT
+========================================================= */
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-nunito), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =========================================================
+   MARKETING BACKGROUND (PUBLIC PAGES ONLY)
+========================================================= */
+.dark body[data-marketing="true"] {
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7),
+      rgba(212, 175, 55, 0.1)
+    ),
+    url("/organ.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   AUTH LAYOUT BACKGROUND (LOGGED-IN PAGES)
+========================================================= */
+.auth-layout {
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+button {
+  cursor: pointer;
+}
+/* Ensure marketing background never leaks into auth */
+.auth-layout {
+  background-image: none !important;
+}
+
+/* =========================================================
+   SURFACE DEFAULTS (CARDS / SECTIONS)
+========================================================= */
+.surface {
+  background-color: var(--surface);
+  color: var(--surface-foreground);
+  border: 1px solid var(--border);
+}
+
+/* =========================================================
+   PANEL DEFAULTS (HEADER / SIDEBAR)
+========================================================= */
+.panel {
+  background-color: var(--panel-bg);
+  border-color: var(--panel-border);
+  color: var(--foreground);
+  backdrop-filter: blur(12px); /* Glassmorphism */
+}
+
+/* =========================================================
+   3D RING SCENE — STABLE & CENTERED
+========================================================= */
+.ring-scene {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  height: 460px;
+  margin: 0 auto;
+
+  perspective: 1000px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   ROTATING RING (JS controls transform)
+========================================================= */
+.ring {
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform;
+
+  /* 👇 ADD THIS */
+  transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   RING CARDS
+========================================================= */
+.ring-card {
+  position: absolute;
+
+  width: 220px;
+  height: 250px;
+
+  top: -125px;  /* half height */
+  left: -110px; /* half width */
+
+  transform-style: preserve-3d;
+
+  border-radius: 1rem;
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+
+  transition:
+    box-shadow 0.4s ease,
+    scale 0.4s ease;
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   ELASTIC CLICK ANIMATION
+========================================================= */
+
+@keyframes elasticPop {
+  0%   { transform: scale(1); }
+  55%  { transform: scale(1.05); }
+  100% { transform: scale(1.08); }
+}
+
+
+/* Inner wrapper handles animation */
+.ring-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: box-shadow 0.4s ease;
+}
+
+/* Hover glow only (no scaling) */
+.ring-card:hover .ring-card-inner {
+  box-shadow:
+    0 0 10px rgba(138, 43, 226, 0.35),
+    0 0 22px rgba(138, 43, 226, 0.2);
+}
+
+/* CLICKED CARD — elastic scale */
+.ring-card-active .ring-card-inner {
+  animation: elasticPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  box-shadow:
+    0 0 16px rgba(138, 43, 226, 0.45),
+    0 0 34px rgba(138, 43, 226, 0.25);
+}
+
+
+/* Media fill */
+.ring-card img,
+.ring-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   HOVER — PURPLE GLOW ONLY (NO PAUSE)
+========================================================= */
+.ring-card:hover {
+  box-shadow:
+    0 0 10px rgba(138, 43, 226, 0.35),
+    0 0 22px rgba(138, 43, 226, 0.2);
+}
+
+/* =========================================================
+   ACTIVE (CLICKED) CARD — ENLARGED + WIDER
+========================================================= */
+.ring-card-active {
+  /* overall emphasis */
+  transform: translateZ(40px) scale(1.12) scaleX(1.3);
+  z-index: 100;
+
+  box-shadow:
+    0 0 14px rgba(138, 43, 226, 0.45),
+    0 0 34px rgba(138, 43, 226, 0.28);
+
+}
+
+/* =========================================================
+   CUSTOM SCROLLBAR
+========================================================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3); /* purple-500 with low opacity */
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.6); /* purple-500 with higher opacity */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
